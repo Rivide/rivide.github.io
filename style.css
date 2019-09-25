@@ -1,0 +1,13 @@
+header {
+    margin: auto;
+    background: black;
+    width: 80%;
+    height: 200px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+#console {
+    width: 50%;
+    background: #000022;
+    height: 100%;
+}
