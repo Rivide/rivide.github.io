@@ -1,3 +1,7 @@
+* {
+    margin: 0;
+    padding: 0;
+}
 header {
     margin: auto;
     background: black;
@@ -6,8 +10,22 @@ header {
     border-radius: 10px;
     overflow: hidden;
 }
-#console {
+.console {
     width: 50%;
-    background: #000022;
+    background: #000088;
     height: 100%;
+    color: white;
+    font-family: monospace;
+}
+.console ul {
+    list-style: none;
+}
+#root {
+    width: 100%;
+    height: 100%;
+}
+.line {
+    background: #0066aa;
+    padding: 0;
+    word-wrap: break-word;
 }
