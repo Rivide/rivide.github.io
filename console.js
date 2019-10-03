@@ -15,46 +15,53 @@ var Console = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (Console.__proto__ || Object.getPrototypeOf(Console)).call(this, props));
 
         _this.state = {
-            lineList: [],
-            lineStarter: React.createElement(
+            lineList: ["hey", "how's", "it", "going"],
+            readingInput: true,
+            inputPrefix: React.createElement(
                 "span",
                 null,
                 "<Console>"
             )
         };
+        _this.inputRef = React.createRef();
+        _this.consoleRef = React.createRef();
+
         _this.handleKeyPress = _this.handleKeyPress.bind(_this);
-        _this.lineRef = React.createRef();
-        _this.state.lineList.push(_this.renderLine(0));
+        //this.lineRef = React.createRef();
+        //this.state.lineList.push(this.renderLine(0));
         return _this;
     }
 
     _createClass(Console, [{
         key: "componentDidUpdate",
         value: function componentDidUpdate() {
-            this.lineRef.current.focus();
+            //this.lineRef.current.focus();
+            this.consoleRef.current.scrollTop = this.consoleRef.current.scrollHeight;
         }
     }, {
         key: "handleKeyPress",
-        value: function handleKeyPress(e) {
+        value: function handleKeyPress(e, inputLine, inputSpan) {
             if (e.key === "Enter") {
                 e.preventDefault();
+
                 var target = e.target;
                 target.innerHTML += "\n";
-                target.setAttribute("contentEditable", "false");
-                this.addLine();
+
+                var input = inputSpan.current.innerHTML;
+                inputSpan.current.innerHTML = "";
+                this.setState(function (state, props) {
+                    return {
+                        lineList: state.lineList.concat(inputLine)
+                    };
+                });
+                this.onInput(input);
+                //this.addLine();
             }
         }
     }, {
-        key: "renderLine",
-        value: function renderLine(i) {
-            var state = this.state;
-            return React.createElement(
-                "li",
-                { key: i },
-                state.lineStarter,
-                React.createElement("span", { className: "line", contentEditable: "true", ref: this.lineRef,
-                    onKeyPress: this.handleKeyPress })
-            );
+        key: "onInput",
+        value: function onInput(input) {
+            console.log(input);
         }
     }, {
         key: "addLine",
@@ -68,15 +75,49 @@ var Console = function (_React$Component) {
             });
         }
     }, {
+        key: "renderLines",
+        value: function renderLines() {
+            return this.state.lineList.map(function (line, i) {
+                return React.createElement(
+                    "li",
+                    { key: i },
+                    React.createElement(
+                        "span",
+                        { className: "line" },
+                        line
+                    )
+                );
+            });
+        }
+    }, {
+        key: "renderInputLine",
+        value: function renderInputLine() {
+            var state = this.state;
+            if (state.readingInput) {
+                var a = React.createElement(Input, { ref: this.inputRef, prefix: this.state.inputPrefix, handleKeyPress: this.handleKeyPress });
+                return a;
+
+                /*return (
+                    <li key={state.lineList.length}>
+                        {state.inputPrefix}
+                        <span className="input" contentEditable="true"
+                            onKeyPress={this.handleKeyPress}></span>
+                    </li>
+                );*/
+            }
+        }
+    }, {
         key: "render",
         value: function render() {
+            console.log("render console");
             return React.createElement(
                 "div",
-                { className: "console" },
+                { className: "console", ref: this.consoleRef },
                 React.createElement(
                     "ul",
                     null,
-                    this.state.lineList
+                    this.renderLines(),
+                    this.renderInputLine()
                 )
             );
         }
@@ -84,5 +125,4 @@ var Console = function (_React$Component) {
 
     return Console;
 }(React.Component);
-
-ReactDOM.render(React.createElement(Console, null), document.getElementById("root"));
+//ReactDOM.render(<Console />, document.getElementById("root"));

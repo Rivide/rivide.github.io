@@ -16,6 +16,8 @@ header {
     height: 100%;
     color: white;
     font-family: monospace;
+    overflow: hidden;
+    overflow-y: auto;
 }
 .console ul {
     list-style: none;
@@ -28,4 +30,18 @@ header {
     background: #0066aa;
     padding: 0;
     word-wrap: break-word;
+    display: flex;
+    overflow: hidden;
+    word-break: break-all;
+
+}
+.line-prefix {
+    flex-shrink: 0;
+}
+.input {
+    word-wrap: break-word;
+    word-break: break-all;
+    line-break: normal;
+    flex-grow: 1;
+    overflow: hidden;
 }
