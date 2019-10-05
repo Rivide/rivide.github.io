@@ -27,7 +27,7 @@ class Console extends React.Component {
             let target = e.target;
             target.innerHTML += "\n";
 
-            let input = inputSpan.current.innerHTML;
+            let input = inputSpan.current.textContent;
             inputSpan.current.innerHTML = "";
             this.setState((state, props) => ({
                 lineList: state.lineList.concat(inputLine)
@@ -38,6 +38,7 @@ class Console extends React.Component {
     }
     onInput(input) {
         console.log(input);
+        this.props.onInput(input);
     }
     addLine() {
         this.setState((state, props) => ({
@@ -77,4 +78,3 @@ class Console extends React.Component {
       );
     }
 }
-//ReactDOM.render(<Console />, document.getElementById("root"));

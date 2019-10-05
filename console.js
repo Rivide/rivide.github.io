@@ -47,7 +47,7 @@ var Console = function (_React$Component) {
                 var target = e.target;
                 target.innerHTML += "\n";
 
-                var input = inputSpan.current.innerHTML;
+                var input = inputSpan.current.textContent;
                 inputSpan.current.innerHTML = "";
                 this.setState(function (state, props) {
                     return {
@@ -62,6 +62,7 @@ var Console = function (_React$Component) {
         key: "onInput",
         value: function onInput(input) {
             console.log(input);
+            this.props.onInput(input);
         }
     }, {
         key: "addLine",
@@ -125,4 +126,3 @@ var Console = function (_React$Component) {
 
     return Console;
 }(React.Component);
-//ReactDOM.render(<Console />, document.getElementById("root"));
