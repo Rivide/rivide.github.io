@@ -69,7 +69,7 @@ class Console extends React.Component {
     render() {
         console.log("render console");
       return (
-        <div className="console" ref={this.consoleRef}>
+        <div className="console" ref={this.consoleRef} style={this.props.style}>
             <ul>
                 {this.renderLines()}
                 {this.renderInputLine()}

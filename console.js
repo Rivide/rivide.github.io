@@ -113,7 +113,7 @@ var Console = function (_React$Component) {
             console.log("render console");
             return React.createElement(
                 "div",
-                { className: "console", ref: this.consoleRef },
+                { className: "console", ref: this.consoleRef, style: this.props.style },
                 React.createElement(
                     "ul",
                     null,
